@@ -36,7 +36,7 @@ export default class App {
         this.sceneManager = new SceneManager();
         this.cameraManager = new CameraManager(aspect);
         this.lightingManager = new LightingManager(this.sceneManager.getScene());
-        this.controlsManager = new ControlsManager(this.cameraManager.getCamera(), this.canvas);
+        this.controlsManager = new ControlsManager(this.canvas);
         this.modelManager = new ModelManager(this.sceneManager.getScene());
         this.animationManager = new AnimationManager();
 
@@ -49,6 +49,7 @@ export default class App {
 
         const model = this.modelManager.getModel();
         this.animationManager.setTarget(model);
+        this.controlsManager.setModel(model);
 
         if (model) {
             this.modelTargetScale = model.scale.x;
@@ -82,7 +83,16 @@ export default class App {
     _animate() {
         if (!this.isRunning) return;
         this.animationFrameId = requestAnimationFrame(this._boundAnimate);
-        this.controlsManager.update();
+
+        // Only update controls if animation is paused (user interacting or waiting)
+        // Otherwise let animation manager handle rotation
+        if (this.animationManager.isPaused) {
+            this.controlsManager.update();
+        } else {
+            // Keep controls synced with animation
+            this.controlsManager.syncWithModel();
+        }
+
         this.animationManager.update();
         this.rendererManager.render(this.sceneManager.getScene(), this.cameraManager.getCamera());
     }
