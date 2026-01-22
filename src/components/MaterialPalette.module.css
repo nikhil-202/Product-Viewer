@@ -1,0 +1,62 @@
+/**
+ * MaterialPalette.module.css
+ * 
+ * Styles for the material palette component.
+ */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.options {
+    display: flex;
+    gap: 8px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #f5f5f5;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.option:hover {
+    background: #e8e8e8;
+}
+
+.option:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
+}
+
+.option.active {
+    background: #333;
+    color: white;
+    border-color: #333;
+}
+
+.icon {
+    font-size: 14px;
+}
+
+.optionLabel {
+    font-size: 13px;
+    font-weight: 500;
+}
